@@ -10,6 +10,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -18,9 +19,10 @@ import java.util.Properties;
 
 
 @Configuration
-@EnableWebMvc
 @PropertySource("classpath:app.properties")
+@EnableWebMvc
 @ComponentScan(basePackages = "com.app")
+@EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
     @Autowired
     private Environment environment;
