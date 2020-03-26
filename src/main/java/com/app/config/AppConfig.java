@@ -57,7 +57,7 @@ public class AppConfig implements WebMvcConfigurer {
         factoryBean.setHibernateProperties(props());
         return factoryBean;
     }
-    
+
 
     //hibernate template
     @Bean

@@ -2,6 +2,7 @@ package com.app.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,7 @@ public class Branch implements Serializable {
     private String city;
 
     @OneToMany
-    @JoinColumn(name = "branch_id")
-    private List<Customer> customers; // mapping from
+    private List<Customer> customers = new ArrayList<Customer>(); // mapping from
 
     public Branch() {
     }

@@ -20,17 +20,15 @@ public class Account implements Serializable {
     @Column(name = "acc_createdOn")
     private Date createdOn;
 
-    private Customer customer_id;
 
     public Account() {
     }
 
-    public Account(Integer id, Double balance, String type, Date createdOn, Customer customer_id) {
+    public Account(Integer id, Double balance, String type, Date createdOn) {
         this.id = id;
         this.balance = balance;
         this.type = type;
         this.createdOn = createdOn;
-        this.customer_id = customer_id;
     }
 
     public Integer getId() {
@@ -65,12 +63,14 @@ public class Account implements Serializable {
         this.createdOn = createdOn;
     }
 
-    public Customer getCustomer_id() {
-        return customer_id;
-    }
-
-    public void setCustomer_id(Customer customer_id) {
-        this.customer_id = customer_id;
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", balance=" + balance +
+                ", type='" + type + '\'' +
+                ", createdOn=" + createdOn +
+                '}';
     }
 }
 

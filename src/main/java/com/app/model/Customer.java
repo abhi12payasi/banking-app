@@ -2,11 +2,13 @@ package com.app.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "customer")
 public class Customer implements Serializable {
+
     @Id
     @GeneratedValue
     @Column(name = "customer_id")
@@ -19,10 +21,8 @@ public class Customer implements Serializable {
     private String address;
 
     @OneToMany
-    @JoinColumn(name = "customer_id")
-    private List<Account> accounts; // mapping from
+    private List<Account> accounts = new ArrayList<Account>(); // mapping from
 
-    private Branch branch_id;
 
     public Customer() {
     }
@@ -64,5 +64,15 @@ public class Customer implements Serializable {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", accounts=" + accounts +
+                '}';
     }
 }
