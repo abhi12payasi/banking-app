@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "branch")
@@ -25,8 +26,9 @@ public class Branch implements Serializable {
     @Column(name = "branch_city")
     private String city;
 
-    @OneToMany
-    private List<Customer> customers = new ArrayList<Customer>(); // mapping from
+    @OneToMany(targetEntity = Customer.class , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id" , referencedColumnName = "id")
+    private Set<Customer> customers;
 
     public Branch() {
     }
@@ -77,6 +79,14 @@ public class Branch implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 
     @Override

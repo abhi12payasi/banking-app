@@ -2,8 +2,7 @@ package com.app.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -20,14 +19,15 @@ public class Customer implements Serializable {
     @Column(name = "customer_address")
     private String address;
 
-    @OneToMany
-    private List<Account> accounts = new ArrayList<Account>(); // mapping from
-
+   @OneToMany(targetEntity = Account.class , cascade = CascadeType.ALL ,
+            fetch = FetchType.LAZY )
+    @JoinColumn(name = "customer_id" , referencedColumnName = "id")
+    private Set<Account> accounts ;
 
     public Customer() {
     }
 
-    public Customer(Integer id, String name, String address, List<Account> accounts) {
+    public Customer(Integer id, String name, String address, Set<Account> accounts) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -58,11 +58,11 @@ public class Customer implements Serializable {
         this.address = address;
     }
 
-    public List<Account> getAccounts() {
+    public Set<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(List<Account> accounts) {
+    public void setAccounts(Set<Account> accounts) {
         this.accounts = accounts;
     }
 
