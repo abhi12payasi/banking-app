@@ -2,9 +2,7 @@ package com.app.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "branch")
@@ -20,25 +18,23 @@ public class Branch implements Serializable {
     @Column(name = "branch_name")
     private String name;
 
-    @Column(name = "branch_location")
-    private String location;
-
     @Column(name = "branch_city")
     private String city;
 
-    @OneToMany(targetEntity = Customer.class , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-    @JoinColumn(name = "branch_id" , referencedColumnName = "id")
-    private Set<Customer> customers;
+    @OneToMany(targetEntity = Customer.class, cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY , mappedBy = "branch")
+    //@JoinColumn(name = "branch_id", referencedColumnName = "branch_id")
+    private List<Customer> customers;
 
     public Branch() {
     }
 
-    public Branch(Integer id, String code, String name, String location, String city) {
+    public Branch(Integer id, String code, String name, String city, List<Customer> customers) {
         this.id = id;
         this.code = code;
         this.name = name;
-        this.location = location;
         this.city = city;
+        this.customers = customers;
     }
 
     public Integer getId() {
@@ -65,14 +61,6 @@ public class Branch implements Serializable {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getCity() {
         return city;
     }
@@ -81,11 +69,11 @@ public class Branch implements Serializable {
         this.city = city;
     }
 
-    public Set<Customer> getCustomers() {
+    public List<Customer> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(Set<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
 
@@ -95,8 +83,8 @@ public class Branch implements Serializable {
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
                 ", city='" + city + '\'' +
+                ", customers=" + customers +
                 '}';
     }
 }
