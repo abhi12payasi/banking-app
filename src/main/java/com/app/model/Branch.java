@@ -77,14 +77,14 @@ public class Branch implements Serializable {
         this.customers = customers;
     }
 
-    @Override
-    public String toString() {
-        return "Branch{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                ", customers=" + customers +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Branch{" +
+//                "id=" + id +
+//                ", code='" + code + '\'' +
+//                ", name='" + name + '\'' +
+//                ", city='" + city + '\'' +
+//                ", customers=" + customers +
+//                '}';
+//    }
 }

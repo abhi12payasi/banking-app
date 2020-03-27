@@ -15,7 +15,7 @@ public class AccountDaoImpl implements IDataModelDao<Account,Integer> {
 
     @Override
     public Integer save(Account account) {
-        return (Integer)ht.save(account);
+        return Integer.parseInt(ht.save(account).toString());
     }
 
     @Override

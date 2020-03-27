@@ -20,23 +20,24 @@ public class Customer implements Serializable {
     private String address;
 
     @OneToMany(targetEntity = Account.class, cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY , mappedBy = "customer")
+            fetch = FetchType.LAZY, mappedBy = "customer")
     //@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private List<Account> accounts;
 
 
     @ManyToOne
-    @JoinColumn(name = "branch_id")
+    @JoinColumn(name = "branch_id", referencedColumnName = "branch_id")
     private Branch branch;
 
     public Customer() {
     }
 
-    public Customer(Integer id, String name, String address, List<Account> accounts) {
+    public Customer(Integer id, String name, String address, List<Account> accounts, Branch branch) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.accounts = accounts;
+        this.branch = branch;
     }
 
     public Integer getId() {
@@ -71,13 +72,22 @@ public class Customer implements Serializable {
         this.accounts = accounts;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", accounts=" + accounts +
-                '}';
+    public Branch getBranch() {
+        return branch;
     }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "Customer{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", address='" + address + '\'' +
+//                ", accounts=" + accounts +
+//                ", branch=" + branch +
+//                '}';
+//    }
 }
